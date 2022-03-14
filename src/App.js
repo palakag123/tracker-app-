@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
+import List from "./components/List/List";
+import NewListItem from "./components/NewListItem/NewListitem";
 
 function App() {
+  //dont directly update state
+  const saveListData = (newListItem) => {
+    setTaskList((list) => [...list, newListItem]);
+  };
+  const list = [
+    { title: "one", description: "one desc", time: "0" },
+    { title: "two", description: "two desc", time: "10" },
+    { title: "three", description: "three desc", time: "10" },
+  ];
+  const [taskList, setTaskList] = useState(list);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <List list={taskList} />
+      <br />
+      <NewListItem onSaveListData={saveListData} />
     </div>
   );
 }
